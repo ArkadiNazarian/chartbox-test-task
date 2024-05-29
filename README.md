@@ -7,7 +7,7 @@ This application allows users to enter the name of a cryptocurrency and retrieve
 
 - Next.js
 - TypeScript
-- Tailwind.css
+- TailwindCSS
 - Formik
 - Yup
 
