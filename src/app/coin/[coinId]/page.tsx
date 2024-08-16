@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
+import { revalidatePath } from "next/cache"
+
 
 interface ICoinParams {
   params: {
@@ -8,7 +10,9 @@ interface ICoinParams {
 
 }
 
+
 async function getCoinData(coinId: string) {
+
   try {
     const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`, {
       cache: "no-store"
@@ -22,6 +26,7 @@ async function getCoinData(coinId: string) {
 
 export default async function Home(props: ICoinParams) {
   const data = await getCoinData(props.params.coinId)
+  revalidatePath('/coin')
 
   if (data.error === "coin not found") {
     notFound()
@@ -49,6 +54,8 @@ export default async function Home(props: ICoinParams) {
           <p className="text-custom_medium_gray">ID</p>
           <p className="custom_extra_dark_gray font-semibold">{data.id}</p>
         </div>
+        {Date.now()}
+        <a href="/coin">coinss</a>
       </div>
     </div>
   )

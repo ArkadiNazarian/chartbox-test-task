@@ -18,6 +18,7 @@ export const SearchBarComponent = () => {
 
   const actionSearch = (value: ICurrencyNameModel) => {
     router.replace(`/coin/${value.currencyName.toLowerCase()}`)
+    router.refresh()
   }
 
   const validationSchema = yup.object().shape({
